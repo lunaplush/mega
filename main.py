@@ -15,8 +15,8 @@ import skimage.data
 image = color.rgb2gray(data.chelsea())
 hog_vec, hog_vis = feature.hog(image, visualise = True)
 
-fig, ax = plt.subplots(1, 2, figsize=(12,6), subplot_kw =  dict(x_ticks = [], y_ticks = []))
-ax[0].imgshow(image,cmap='gray')
+fig, ax = plt.subplots(1, 2, figsize=(12,6), subplot_kw =  dict(xticks = [], yticks = []))
+ax[0].im show(image,cmap='gray')
 ax[0].set_title('input image')
-ax[1].imgshow(hog_vis)
+ax[1].imshow(hog_vis)
 ax[1].set_title('visualisation of HOG features')
