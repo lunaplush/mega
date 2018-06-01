@@ -1,13 +1,14 @@
 import numpy as np
 import tensorflow as tf
-import tensorflow.contrib.eager as tfe
+#import tensorflow.contrib.eager as tfe
 import os
-
+import time
 #tf.enable_eager_execution()
 res  = tf.executing_eagerly()  
 print("TensorFlow version: {}".format(tf.VERSION))
 print("Eager execution: {}".format(tf.executing_eagerly()))
 
+t_begin = time.time()
 
 if (res):
     print("Executing Eargerly")
@@ -51,7 +52,7 @@ G_cost = tf.reduce_mean(tf.log(1.0 - x_gen_score))
 
 
 batch_size =  64
-updates = 4#0000
+updates = 40000
 learning_rate = 0.01
 prior_mu = -2.5
 prior_std = 0.5
@@ -78,7 +79,10 @@ for  i in range(updates):
     sess.run(D_optimizer,feed_dict = {z_p:z_batch,x_d:x_batch})
     z_batch = sample_z()
     sess.run(G_optimizer,feed_dict = {z_p:z_batch})
+
+
+t_end = time.time()
+print("end, time = ", t_end-t_begin)
     
-    
-saver = tf.train.Saver()
-saves = saver.save(sess,'model.ckpt')
+#saver = tf.train.Saver()
+#saves = saver.save(sess,'model.ckpt')
